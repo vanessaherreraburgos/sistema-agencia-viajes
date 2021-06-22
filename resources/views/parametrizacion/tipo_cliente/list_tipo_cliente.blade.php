@@ -1,0 +1,51 @@
+
+@extends('layouts.template')
+
+@section('title')
+    {{trans('copies.breadcrumbs.list_tipo_cliente')}}
+@endsection
+
+@section('hist_navegacion')
+    @component('components.historial_navegacion')    
+        @slot('breadcrumbs', [
+	        "home" 			=> trans('copies.breadcrumbs.home'),
+	        "active" 		=> trans('copies.breadcrumbs.list_tipo_cliente')
+	    ])
+    @endcomponent
+@endsection
+
+@section('content')
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title border-bottom">
+                        <h5>{{trans('copies.tipo_cliente.listar_tipo_cliente')}}<small></small></h5>
+                        <div class="ibox-tools-link">
+                            <a class="btn btn-default" href="{{url('vehiculos/crear')}}">
+                                <i class="fa fa-plus"></i> {{trans('copies.generales.boton_nuevo')}}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+						@component('components.tabla_elementos')    
+	                		@slot('id')
+						        tablaListarTipoCliente
+						    @endslot
+					        @slot('headers', [
+								trans('copies.tipo_cliente.codigo'),
+						        trans('copies.tipo_cliente.descripcion'),
+						        trans('copies.tipo_cliente.porcentaje_dscto'),						       
+						        trans('copies.generales.acciones')
+						    ])
+					    @endcomponent
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+@endsection
+
+@section('codigo_scripts')
+	<script src="{{ asset('/js/parametrizacion/tipo_cliente/tipo_cliente.js') }}"></script>
+@endsection
